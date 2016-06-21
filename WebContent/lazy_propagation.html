@@ -1,0 +1,443 @@
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>University a Educational Category Flat Bootstarp Responsive Website Template | Blog :: w3layouts</title>
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary JavaScript plugins) -->
+<script src="js/bootstrap.js"></script>
+<!-- Custom Theme files -->
+<link rel="stylesheet" href="css/touchTouch.css" type="text/css" media="all" />
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="University Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script src="js/jquery.min.js"></script>
+ <script src="js/bootstrap.js"></script>
+
+</head>
+<body>
+<!-- banner --> 
+<div class="banner2">	  
+	 <div class="header">
+			 <div class="logo">
+				 <a href="index.html"><img src="images/logo.jpg" alt=""/></a>
+			 </div>
+			 <div class="top-menu">
+				 <span class="menu"></span>
+				 <ul class="navig">
+					  <li><a href="index.jsp">Home</a></li>
+					 <li><a href="about.jsp">About</a></li>
+					 <li><a href="program.jsp">Programs</a></li>
+					 <li class="active"><a href="blog.jsp">Blog</a></li>
+					 <li><a href="gallery.jsp">Gallery</a></li>
+					 <li><a href="contact.jsp">Contact</a></li>
+					 <li><a href="signup.jsp">Sign Up</a></li>
+					 <li><a href="login.jsp">Login</a></li>
+				 </ul>
+			 </div>
+			 <!-- script-for-menu -->
+		 <script>
+				$("span.menu").click(function(){
+					$("ul.navig").slideToggle("slow" , function(){
+					});
+				});
+		 </script>
+		 <!-- script-for-menu -->
+			 <div class="clearfix"></div>
+	 </div>	  
+</div>
+<!---->
+<!-- blog-page -->
+<div class="blog">
+		<div class="container">
+			<div class="blog-head">
+				<h2>Blog</h2>
+			</div>
+			<div class="col-md-8 blog-left" >
+				<div class="blog-info">
+					<h3><a href="lazy_propagation.html">SEGMENT TREE(Lazy Propagation)</a></h3>
+					<p>Posted By <a href="#">SAGAR KAPOOR</a> &nbsp;&nbsp; on August 1, 2015 &nbsp;&nbsp; <a href="#">No Comments</a></p>
+					
+					
+					
+					<br></br>
+					
+					
+					<p class="snglp">In this topic i will explain a very interesting data structure that can be used to solve a specific set of problems. I will start by explaining its definition and the proceeding with an example problem to solve with it.</p>
+					<br>
+						<h3 class="snglp" style="color:black;">Construction of Segment Tree from given array</h3>
+						<p class="snglp" style="color:black;">What is segment trees?</p><br>
+						<p class="snglp">
+					Segment Trees is a Tree data structure for storing intervals, or segments, It allows querying which of the stored segments contain a given point. It is, in principle, a static structure; that is, its content cannot be modified once the structure is built. It only uses O(N lg(N)) storage.
+
+A segment trees has only three operations: build_tree, update_tree, query_tree.
+<br>
+Building tree: To init the tree segments or intervals values
+<br>Update tree: To update value of an interval or segment
+<br>Query tree: To retrieve the value of an interval or segment</p>
+<br>
+<p class="snglp" style="color:black;">Example Segment Tree:</p>
+The first node will hold the information for the interval [i, j]
+If i less than j the left and right son will hold the information for the intervals [i, (i+j)/2] and [(i+j)/2+1, j]
+Notice that the height of a segment tree for an interval with N elements is [logN] + 1. Here is how a segment tree for the interval [0, 9] would look like: 
+</p>
+					<div class="blog-info-text">
+						<div class="blog-img">
+							<a> <img src="images/lazy.png" class="img-responsive zoom-img" alt=""/></a>
+						</div>
+						<p class="snglp">
+						
+
+
+<br>
+<h3 style="color:black;class="snglp"">Using Normal Update</h3>
+<p class="snglp" style="color:black;">IMPLEMENTATION</p>
+
+<h3 style="color:black; background-color:gray;">
+<pre>
+/**
+ * In this code we have a very large array called arr, and very large set of operations
+ * Operation #1: Increment the elements within range [i, j] with value val
+ * Operation #2: Get max element within range [i, j]
+ * Build tree: build_tree(1, 0, N-1)
+ * Update tree: update_tree(1, 0, N-1, i, j, value)
+ * Query tree: query_tree(1, 0, N-1, i, j)
+ */
+
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+#include<string.h>
+#include<math.h> 
+
+#define N 20
+#define MAX (1+(1<<6)) // Why? :D
+#define inf 0x7fffffff
+
+int arr[N];
+int tree[MAX];
+
+/**
+ * Build and init tree
+ */
+void build_tree(int node, int a, int b) {
+    if(a > b) return; // Out of range
+  	
+  	if(a == b) { // Leaf node
+    		tree[node] = arr[a]; // Init value
+		return;
+	}
+	
+	build_tree(node*2, a, (a+b)/2); // Init left child
+	build_tree(node*2+1, 1+(a+b)/2, b); // Init right child
+	
+	tree[node] = max(tree[node*2], tree[node*2+1]); // Init root value
+}
+
+/**
+ * Increment elements within range [i, j] with value value
+ */
+void update_tree(int node, int a, int b, int i, int j, int value) {
+    
+	if(a > b || a > j || b < i) // Current segment is not within range [i, j]
+		return;
+    
+  	if(a == b) { // Leaf node
+    		tree[node] += value;
+    		return;
+	}
+
+	update_tree(node*2, a, (a+b)/2, i, j, value); // Updating left child
+	update_tree(1+node*2, 1+(a+b)/2, b, i, j, value); // Updating right child
+
+	tree[node] = max(tree[node*2], tree[node*2+1]); // Updating root with max value
+}
+
+/**
+ * Query tree to get max element value within range [i, j]
+ */
+int query_tree(int node, int a, int b, int i, int j) {
+	
+	if(a > b || a > j || b < i) return -inf; // Out of range
+
+	if(a >= i && b <= j) // Current segment is totally within range [i, j]
+		return tree[node];
+
+	int q1 = query_tree(node*2, a, (a+b)/2, i, j); // Query left child
+	int q2 = query_tree(1+node*2, 1+(a+b)/2, b, i, j); // Query right child
+
+	int res = max(q1, q2); // Return final result
+	
+	return res;
+}
+
+int main() {
+	for(int i = 0; i < N; i++) arr[i] = 1;
+
+	build_tree(1, 0, N-1);
+
+	update_tree(1, 0, N-1, 0, 6, 5); // Increment range [0, 6] by 5
+	update_tree(1, 0, N-1, 7, 10, 12); // Incremenet range [7, 10] by 12
+	update_tree(1, 0, N-1, 10, N-1, 100); // Increment range [10, N-1] by 100
+
+	cout << query_tree(1, 0, N-1, 0, N-1) << endl; // Get max element in range [0, N-1]
+}</pre>
+</h3>
+
+<h3 style="color:black;class="snglp"">Using Lazy Propagation</h3>
+
+<pre>
+/**
+ * In this code we have a very large array called arr, and very large set of operations
+ * Operation #1: Increment the elements within range [i, j] with value val
+ * Operation #2: Get max element within range [i, j]
+ * Build tree: build_tree(1, 0, N-1)
+ * Update tree: update_tree(1, 0, N-1, i, j, value)
+ * Query tree: query_tree(1, 0, N-1, i, j)
+ */
+
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+#include<string.h>
+#include<math.h> 
+
+#define N 20
+#define MAX (1+(1<<6)) // Why? :D
+#define inf 0x7fffffff
+
+int arr[N];
+int tree[MAX];
+int lazy[MAX];
+
+/**
+ * Build and init tree
+ */
+void build_tree(int node, int a, int b) {
+  	if(a > b) return; // Out of range
+  	
+  	if(a == b) { // Leaf node
+    		tree[node] = arr[a]; // Init value
+		return;
+	}
+	
+	build_tree(node*2, a, (a+b)/2); // Init left child
+	build_tree(node*2+1, 1+(a+b)/2, b); // Init right child
+	
+	tree[node] = max(tree[node*2], tree[node*2+1]); // Init root value
+}
+
+/**
+ * Increment elements within range [i, j] with value value
+ */
+void update_tree(int node, int a, int b, int i, int j, int value) {
+  
+  	if(lazy[node] != 0) { // This node needs to be updated
+   		tree[node] += lazy[node]; // Update it
+
+		if(a != b) {
+			lazy[node*2] += lazy[node]; // Mark child as lazy
+    			lazy[node*2+1] += lazy[node]; // Mark child as lazy
+		}
+
+   		lazy[node] = 0; // Reset it
+  	}
+  
+	if(a > b || a > j || b < i) // Current segment is not within range [i, j]
+		return;
+    
+  	if(a >= i && b <= j) { // Segment is fully within range
+    		tree[node] += value;
+
+		if(a != b) { // Not leaf node
+			lazy[node*2] += value;
+			lazy[node*2+1] += value;
+		}
+
+    		return;
+	}
+
+	update_tree(node*2, a, (a+b)/2, i, j, value); // Updating left child
+	update_tree(1+node*2, 1+(a+b)/2, b, i, j, value); // Updating right child
+
+	tree[node] = max(tree[node*2], tree[node*2+1]); // Updating root with max value
+}
+
+/**
+ * Query tree to get max element value within range [i, j]
+ */
+int query_tree(int node, int a, int b, int i, int j) {
+	
+	if(a > b || a > j || b < i) return -inf; // Out of range
+
+	if(lazy[node] != 0) { // This node needs to be updated
+		tree[node] += lazy[node]; // Update it
+
+		if(a != b) {
+			lazy[node*2] += lazy[node]; // Mark child as lazy
+			lazy[node*2+1] += lazy[node]; // Mark child as lazy
+		}
+
+		lazy[node] = 0; // Reset it
+	}
+
+	if(a >= i && b <= j) // Current segment is totally within range [i, j]
+		return tree[node];
+
+	int q1 = query_tree(node*2, a, (a+b)/2, i, j); // Query left child
+	int q2 = query_tree(1+node*2, 1+(a+b)/2, b, i, j); // Query right child
+
+	int res = max(q1, q2); // Return final result
+	
+	return res;
+}
+
+int main() {
+	for(int i = 0; i < N; i++) arr[i] = 1;
+
+	build_tree(1, 0, N-1);
+
+	memset(lazy, 0, sizeof lazy);
+
+	update_tree(1, 0, N-1, 0, 6, 5); // Increment range [0, 6] by 5
+	update_tree(1, 0, N-1, 7, 10, 12); // Incremenet range [7, 10] by 12
+	update_tree(1, 0, N-1, 10, N-1, 100); // Increment range [10, N-1] by 100
+
+	cout << query_tree(1, 0, N-1, 0, N-1) << endl; // Get max element in range [0, N-1]
+}
+</pre>
+<p class="snglp" style="color: black;">
+<br>
+<h3>Refrences</h3>
+
+<a style="color: red;" href="https://www.youtube.com/watch?v=ZBHKZF5w4YU">https://www.youtube.com/watch?v=ZBHKZF5w4YU</a><br>
+<a style="color: red;" href="http://community.topcoder.com/tc?module=Static&d1=tutorials&d2=lowestCommonAncestor#Range_Minimum_Query_(RMQ)">http://community.topcoder.com/tc?module=Static&d1=tutorials&d2=lowestCommonAncestor#Range_Minimum_Query_(RMQ)</a><br>
+<a style="color: red;" href="http://wcipeg.com/wiki/Range_minimum_query">http://wcipeg.com/wiki/Range_minimum_query</a>
+
+</p>
+
+
+					</div>	
+				</div>
+				<div class="blog-info">
+						
+				</div>	
+				<div class="blog-info">
+						
+				</div>	
+				
+			</div>	
+			<div class="col-md-4 single-page-right">
+				<div class="category blog-ctgry">
+					<h4>Categories</h4>
+					<div class="list-group">
+						<a href="segment_tree.html" class="list-group-item">Segment Tree</a>
+						<a href="segment_tree_rmq.html" class="list-group-item">Segment Tree(RMQ)</a>
+						<a href="lazy_propagation.html" class="list-group-item">Lazy Prapagation</a>
+						<a href="DP_knapsack.html" class="list-group-item">Dynamic Programming(Knapsack)</a>
+						
+					
+					</div>
+				</div>	
+				<div class="recent-posts">
+					<h4>Quotes</h4>
+					<div class="recent-posts-info">
+						<div class="posts-left sngl-img">
+							<a> <img src="images/quote1.jpg" class="img-responsive zoom-img" alt=""/></a>
+						
+							</div>
+						
+						<div class="clearfix"> </div>
+					</div>	
+					<div class="recent-posts-info">
+						
+						<div class="posts-right">
+							<label>August 1, 2015</label>
+							<h5><a>Quotes</a></h5>
+							<p>Your Knowledge Increases If You Share It</p>
+							</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="clearfix"> </div>
+				</div>				
+			</div>
+			<div class="clearfix"> </div>
+			<nav>
+				<ul class="pagination">
+					<li>
+						
+							
+						</a>
+					</li>
+					
+					<li>
+						
+							
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>	
+	</div>	
+	<!--//blog-->
+
+<!---->
+<div class="footer">
+	 <div class="container">
+		 <div class="ftr-sec">
+			 <div class="col-md-4 ftr-grid">
+				 <h3>ACM-ICPC</h3>
+				 <p>The ACM International Collegiate Programming Contest (ICPC) is a multitier, team-based, programming competition operating 
+			under the auspices of ACM and headquartered at Baylor University. The contest involves a global network of universities 
+			hosting regional competitions that advance teams to the ACM-ICPC World Finals. Participation has grown to several tens of 
+			thousands of the finest students and faculty in computing disciplines at almost 2,534 universities from over 101 countries 
+			on six continents. The contest fosters creativity, teamwork, and innovation in building new software programs, and enables 
+			students to test their ability to perform under pressure. Quite simply, it is the oldest, largest, and most prestigious 
+			programming contest in the world.</p> </div>
+			 <div class="col-md-4 ftr-grid2">
+				 <h3>Pages</h3>
+				 <ul>
+					 <li><a href="index.html"><span></span>Home</a></li>
+					 <li><a href="about.html"><span></span>About</a></li>
+					 <li><a href="program.html"><span></span>Programs</a></li>
+					 <li><a href="blog.html"><span></span>Blog</a></li>	
+					 <li><a href="gallery.html"><span></span>Gallery</a></li>
+					 <li><a href="contact.html"><span></span>Contact</a></li>
+				 </ul>
+			 </div>
+			 <div class="col-md-4 ftr-grid3">
+				 <h3>Quick links</h3>
+				 <ul>
+					 <li><a href="about.html"><span></span>History</a></li>
+					 <li><a href="about.html"><span></span>Departments</a></li>
+					 <li><a href="gallery.html"><span></span>Services</a></li>
+					 <li><a href="blog.html"><span></span>Guidancs</a></li>	
+					 <li><a href="about.html"><span></span>Team</a></li>
+					 <li><a href="contact.html"><span></span>Contact</a></li>
+				 </ul>
+			 </div>
+			 <div class="clearfix"></div>
+		 </div>
+	 </div>
+</div>
+<!---->
+<div class="copywrite">
+	 <div class="container">
+		 <p>Copyright © 2015 University. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+	 </div>
+</div>
+<!---->
+</body>
+</html>

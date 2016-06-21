@@ -1,0 +1,325 @@
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>University a Educational Category Flat Bootstarp Responsive Website Template | Blog :: w3layouts</title>
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary JavaScript plugins) -->
+<script src="js/bootstrap.js"></script>
+<!-- Custom Theme files -->
+<link rel="stylesheet" href="css/touchTouch.css" type="text/css" media="all" />
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="University Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script src="js/jquery.min.js"></script>
+ <script src="js/bootstrap.js"></script>
+
+</head>
+<body>
+<!-- banner --> 
+<div class="banner2">	  
+	 <div class="header">
+			 <div class="logo">
+				 <a href="index.html"><img src="images/logo.jpg" alt=""/></a>
+			 </div>
+			 <div class="top-menu">
+				 <span class="menu"></span>
+				 <ul class="navig">
+					  <li><a href="index.jsp">Home</a></li>
+					 <li><a href="about.jsp">About</a></li>
+					 <li><a href="program.jsp">Programs</a></li>
+					 <li class="active"><a href="blog.jsp">Blog</a></li>
+					 <li><a href="gallery.jsp">Gallery</a></li>
+					 <li><a href="contact.jsp">Contact</a></li>
+					 <li><a href="signup.jsp">Sign Up</a></li>
+					 <li><a href="login.jsp">Login</a></li>
+				 </ul>
+			 </div>
+			 <!-- script-for-menu -->
+		 <script>
+				$("span.menu").click(function(){
+					$("ul.navig").slideToggle("slow" , function(){
+					});
+				});
+		 </script>
+		 <!-- script-for-menu -->
+			 <div class="clearfix"></div>
+	 </div>	  
+</div>
+<!---->
+<!-- blog-page -->
+<div class="blog">
+		<div class="container">
+			<div class="blog-head">
+				<h2>Blog</h2>
+			</div>
+			<div class="col-md-8 blog-left" >
+				<div class="blog-info">
+					<h3><a href="DP_knapsack.html">Dynamic Programming ( 0-1 Knapsack Problem)</a></h3>
+					<p>Posted By <a href="#">SAGAR KAPOOR</a> &nbsp;&nbsp; on August 1, 2015 &nbsp;&nbsp; <a href="#">No Comments</a></p>
+					
+					
+					
+					<br></br>
+					
+					
+					<p class="snglp">Given weights and values of n items, put these items in a knapsack of capacity W to get the maximum total value in the knapsack. In other words, given two integer arrays val[0..n-1] and wt[0..n-1] which represent values and weights associated with n items respectively. Also given an integer W which represents knapsack capacity, find out the maximum value subset of val[] such that sum of the weights of this subset is smaller than or equal to W. You cannot break an item, either pick the complete item, or don’t pick it (0-1 property).<br>
+
+A simple solution is to consider all subsets of items and calculate the total weight and value of all subsets. Consider the only subsets whose total weight is smaller than W. From all such subsets, pick the maximum value subset.</p>
+					
+					
+					<div class="blog-info-text">
+						<div class="blog-img">
+							<a> <img src="images/knapsack.png" class="img-responsive zoom-img" alt=""/></a>
+						</div>
+						<br>
+						<h3 class="snglp" style="color:black;">1) Optimal Substructure:</h3>
+						<p class="snglp">
+						
+To consider all subsets of items, there can be two cases for every item: (1) the item is included in the optimal subset, (2) not included in the optimal set.
+Therefore, the maximum value that can be obtained from n items is max of following two values.<br>
+1) Maximum value obtained by n-1 items and W weight (excluding nth item).<br>
+2) Value of nth item plus maximum value obtained by n-1 items and W minus weight of the nth item (including nth item).
+<br>
+If weight of nth item is greater than W, then the nth item cannot be included and case 1 is the only possibility.
+
+
+</p>
+<br>
+<h3 style="color:black;class="snglp">IMPLMENTATION</h3>
+<br>
+<p style="color:black;class="snglp">1) RECURSIVE APPROACH</p>			
+<h3 style="color:black; background-color:gray;">
+<pre>
+/* A Naive recursive implementation of 0-1 Knapsack problem */
+#include<stdio.h>
+ 
+// A utility function that returns maximum of two integers
+int max(int a, int b) { return (a > b)? a : b; }
+ 
+// Returns the maximum value that can be put in a knapsack of capacity W
+int knapSack(int W, int wt[], int val[], int n)
+{
+   // Base Case
+   if (n == 0 || W == 0)
+       return 0;
+ 
+   // If weight of the nth item is more than Knapsack capacity W, then
+   // this item cannot be included in the optimal solution
+   if (wt[n-1] > W)
+       return knapSack(W, wt, val, n-1);
+ 
+   // Return the maximum of two cases: (1) nth item included (2) not included
+   else return max( val[n-1] + knapSack(W-wt[n-1], wt, val, n-1),
+                    knapSack(W, wt, val, n-1)
+                  );
+}
+ 
+// Driver program to test above function
+int main()
+{
+    int val[] = {60, 100, 120};
+    int wt[] = {10, 20, 30};
+    int  W = 50;
+    int n = sizeof(val)/sizeof(val[0]);
+    printf("%d", knapSack(W, wt, val, n));
+    return 0;
+}</pre>
+</h3>
+<p class="snglp">
+It should be noted that the above function computes the same subproblems again and again. See the following recursion tree, K(1, 1) is being evaluated twice. Time complexity of this naive recursive solution is exponential (2^n).
+</p>
+<pre>
+In the following recursion tree, K() refers to knapSack().  The two 
+parameters indicated in the following recursion tree are n and W.  
+The recursion tree is for following sample inputs.
+wt[] = {1, 1, 1}, W = 2, val[] = {10, 20, 30}
+
+                       K(3, 2)         ---------> K(n, W)
+                   /            \ 
+                 /                \               
+            K(2,2)                  K(2,1)
+          /       \                  /    \ 
+        /           \              /        \
+       K(1,2)      K(1,1)        K(1,1)     K(1,0)
+       /  \         /   \          /   \
+     /      \     /       \      /       \
+K(0,2)  K(0,1)  K(0,1)  K(0,0)  K(0,1)   K(0,0)
+Recursion tree for Knapsack capacity 2 units and 3 items of 1 unit weight.
+
+
+</pre>
+<p class="snglp">Since suproblems are evaluated again, this problem has Overlapping Subprolems property. So the 0-1 Knapsack problem has both properties (see this and this) of a dynamic programming problem. Like other typical Dynamic Programming(DP) problems, recomputations of same subproblems can be avoided by constructing a temporary array K[][] in bottom up manner. Following is Dynamic Programming based implementation.</p>
+<p style="color:black;class="snglp">1) ITERATIVE APPROACH</p>
+<pre>
+// A Dynamic Programming based solution for 0-1 Knapsack problem
+#include<stdio.h>
+ 
+// A utility function that returns maximum of two integers
+int max(int a, int b) { return (a > b)? a : b; }
+ 
+// Returns the maximum value that can be put in a knapsack of capacity W
+int knapSack(int W, int wt[], int val[], int n)
+{
+   int i, w;
+   int K[n+1][W+1];
+ 
+   // Build table K[][] in bottom up manner
+   for (i = 0; i <= n; i++)
+   {
+       for (w = 0; w <= W; w++)
+       {
+           if (i==0 || w==0)
+               K[i][w] = 0;
+           else if (wt[i-1] <= w)
+                 K[i][w] = max(val[i-1] + K[i-1][w-wt[i-1]],  K[i-1][w]);
+           else
+                 K[i][w] = K[i-1][w];
+       }
+   }
+ 
+   return K[n][W];
+}
+ 
+int main()
+{
+    int val[] = {60, 100, 120};
+    int wt[] = {10, 20, 30};
+    int  W = 50;
+    int n = sizeof(val)/sizeof(val[0]);
+    printf("%d", knapSack(W, wt, val, n));
+    return 0;
+}
+</pre>
+<p class="snglp" style="color: black;">
+<br>
+<h3>Refrences</h3>
+
+<a style="color: red;" href="http://www.es.ele.tue.nl/education/5MC10/Solutions/knapsack.pdf">http://www.es.ele.tue.nl/education/5MC10/Solutions/knapsack.pdf</a><br>
+<a style="color: red;" href="http://www.cse.unl.edu/~goddard/Courses/CSCE310J/Lectures/Lecture8-DynamicProgramming.pdf">http://www.cse.unl.edu/~goddard/Courses/CSCE310J/Lectures/Lecture8-DynamicProgramming.pdf</a><br>
+
+</p>
+
+
+					</div>	
+				</div>
+				<div class="blog-info">
+						
+				</div>	
+				<div class="blog-info">
+						
+				</div>	
+				
+			</div>	
+			<div class="col-md-4 single-page-right">
+				<div class="category blog-ctgry">
+					<h4>Categories</h4>
+					<div class="list-group">
+						<a href="segment_tree.html" class="list-group-item">Segment Tree</a>
+						<a href="segment_tree_rmq.html" class="list-group-item">Segment Tree(RMQ)</a>
+						<a href="lazy_propagation.html" class="list-group-item">Lazy Prapagation</a>
+						<a href="DP_knapsack.html" class="list-group-item">Dynamic Programming(Knapsack)</a>
+						
+					
+					</div>
+				</div>	
+				<div class="recent-posts">
+					<h4>Quotes</h4>
+					<div class="recent-posts-info">
+						<div class="posts-left sngl-img">
+							<a> <img src="images/quote1.jpg" class="img-responsive zoom-img" alt=""/></a>
+						
+							</div>
+						
+						<div class="clearfix"> </div>
+					</div>	
+					<div class="recent-posts-info">
+						
+						<div class="posts-right">
+							<label>August 1, 2015</label>
+							<h5><a>Quotes</a></h5>
+							<p>Your Knowledge Increases If You Share It</p>
+							</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="clearfix"> </div>
+				</div>				
+			</div>
+			<div class="clearfix"> </div>
+			<nav>
+				<ul class="pagination">
+					<li>
+						
+							
+						</a>
+					</li>
+					
+					<li>
+						
+							
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>	
+	</div>	
+	<!--//blog-->
+
+<!---->
+<div class="footer">
+	 <div class="container">
+		 <div class="ftr-sec">
+			 <div class="col-md-4 ftr-grid">
+				 <h3>ACM-ICPC</h3>
+				 <p>The ACM International Collegiate Programming Contest (ICPC) is a multitier, team-based, programming competition operating 
+			under the auspices of ACM and headquartered at Baylor University. The contest involves a global network of universities 
+			hosting regional competitions that advance teams to the ACM-ICPC World Finals. Participation has grown to several tens of 
+			thousands of the finest students and faculty in computing disciplines at almost 2,534 universities from over 101 countries 
+			on six continents. The contest fosters creativity, teamwork, and innovation in building new software programs, and enables 
+			students to test their ability to perform under pressure. Quite simply, it is the oldest, largest, and most prestigious 
+			programming contest in the world.</p> </div>
+			 <div class="col-md-4 ftr-grid2">
+				 <h3>Pages</h3>
+				 <ul>
+					 <li><a href="index.html"><span></span>Home</a></li>
+					 <li><a href="about.html"><span></span>About</a></li>
+					 <li><a href="program.html"><span></span>Programs</a></li>
+					 <li><a href="blog.html"><span></span>Blog</a></li>	
+					 <li><a href="gallery.html"><span></span>Gallery</a></li>
+					 <li><a href="contact.html"><span></span>Contact</a></li>
+				 </ul>
+			 </div>
+			 <div class="col-md-4 ftr-grid3">
+				 <h3>Quick links</h3>
+				 <ul>
+					 <li><a href="about.html"><span></span>History</a></li>
+					 <li><a href="about.html"><span></span>Departments</a></li>
+					 <li><a href="gallery.html"><span></span>Services</a></li>
+					 <li><a href="blog.html"><span></span>Guidancs</a></li>	
+					 <li><a href="about.html"><span></span>Team</a></li>
+					 <li><a href="contact.html"><span></span>Contact</a></li>
+				 </ul>
+			 </div>
+			 <div class="clearfix"></div>
+		 </div>
+	 </div>
+</div>
+<!---->
+<div class="copywrite">
+	 <div class="container">
+		 <p>Copyright © 2015 University. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+	 </div>
+</div>
+<!---->
+</body>
+</html>
